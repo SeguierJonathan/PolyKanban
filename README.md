@@ -15,4 +15,4 @@ Le projet permet de mettre en avant :
 - la maîtrise de plusieurs environnements backend
 - la capacité à standardiser et reproduire une solution technique
 
-PolyKanban peut être utilisé comme base d’expérimentation ou comme support de démonstration de compétences en développement backend.git add
+PolyKanban peut être utilisé comme base d’expérimentation ou comme support de démonstration de compétences en développement backend.git addinit
