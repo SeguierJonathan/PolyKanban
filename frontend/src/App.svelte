@@ -1,5 +1,6 @@
 <script lang="ts">
   import { kanbanData } from "./lib/data/kanban";
+  import { Button, Willow } from "@svar-ui/svelte-core";
 </script>
 
 <header>
@@ -24,6 +25,7 @@
     {/each}
     <article class="kanban__card">
       <h3>Ajouter une list</h3>
+      <Willow><Button type="primary">Click me</Button></Willow>
     </article>
   </ul>
 </main>
