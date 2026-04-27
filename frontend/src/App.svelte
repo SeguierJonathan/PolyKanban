@@ -7,23 +7,23 @@
 </header>
 <main>
   <ul class="kanban__board">
-    {#each kanbanData.Lists as list, index (list.id)}
+    {#each kanbanData.lists as list, index (list.id)}
       <li class="kanban__list">
         <h2>{list.title}</h2>
-
-        {#each kanbanData.Lists[index].cards as card}
+        {#each kanbanData.lists[index].cards as card, indexCard (card.id)}
           <article class="kanban__card">
             <h3>{card.title}</h3>
             <p>{card.text}</p>
+            <ul class="kanban__tags">
+              {#each kanbanData.lists[index].cards[indexCard].tags as tag}
+                <li class="kanban__tag" style="background-color: {tag.color};">
+                  <span>{tag.text}</span>
+                </li>
+              {/each}
+            </ul>
           </article>
         {/each}
-        <article class="kanban__card">
-          <h3>Ajouter une card</h3>
-        </article>
       </li>
     {/each}
-    <article class="kanban__card">
-      <h3>Ajouter une list</h3>
-    </article>
   </ul>
 </main>

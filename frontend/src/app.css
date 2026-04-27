@@ -1,21 +1,10 @@
 /* 🎨 Couleurs */
 :root {
-  --text: #6b6375;
+  --text: #2c3e50;
   --text-h: #08060d;
   --bg: #e8edf5;
   --bgdark: #bcd0f1;
   --border: #e5e4e7;
-
-  /* Accent */
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-
-  /* UI */
-  --code-bg: #f4f3ec;
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow: rgba(0, 0, 0, 0.1) 0 10px 15px -3px,
-    rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 
   /* Typo */
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
@@ -34,12 +23,16 @@ html {
 body {
   margin: 0;
   font-size: 1.6rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background-color: var(--bg);
 }
 
 h1,
-h2 {
+h2,
+h3 {
   font-weight: bold;
+  color: var(--text);
+  margin-bottom: 1rem;
 }
 
 h1 {
@@ -57,12 +50,12 @@ header {
 
 p {
   margin: 0;
+  margin-bottom: 1rem;
 }
 
 #app {
   max-width: 100%;
   margin: 0 auto;
-  text-align: center;
   min-height: 100svh;
   display: flex;
   flex-direction: column;
@@ -71,21 +64,58 @@ p {
 
 .kanban__board {
   display: flex;
+  align-items: flex-start;
   gap: 2rem;
   padding: 2rem;
+  overflow-x: auto;
+}
+
+.kanban__tag {
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 200px;
+  padding: 0.8rem;
+}
+
+.kanban__tags {
+
+  display: flex;
+  gap: 1rem;
+  text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+
 }
 
 .kanban__card {
-  border: 1px solid green;
+
+  background-color: var(--bg);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   border-radius: 1rem;
+  border: 2px solid transparent;
+  transition: border 0.2s ease;
+  padding: 1.5rem;
+  cursor: pointer;
+
+}
+
+.kanban__card:hover {
+  Border: 2px solid var(--bgdark);
 }
 
 .kanban__list {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  width: 300px;
+  background-color: white;
+  flex: 0 0 300px;
   padding: 2rem;
-  border: 1px solid red;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   border-radius: 1rem;
+}
+
+.kanban__list h2 {
+  padding: 0.8rem;
+  border-bottom: 2px solid var(--text);
 }
