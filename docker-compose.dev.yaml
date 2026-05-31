@@ -1,28 +1,47 @@
 services:
   postgres:
-    image: postgres:18
+    image: postgres:17
+    restart: unless-stopped
+    ports:
+      - 5433:5432
     env_file:
       - .env
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $POSTGRES_USER -d $POSTGRES_DB" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     volumes:
-      - polykanban-postgres-data:/var/lib/postgresql
+      - polykanban-postgres-data:/var/lib/postgresql/data
+
+  flyway:
+    image: flyway/flyway:12
+    environment:
+      FLYWAY_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB}
+      FLYWAY_USER: ${POSTGRES_USER}
+      FLYWAY_PASSWORD: ${POSTGRES_PASSWORD}
+    command:
+      - migrate
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+    volumes:
+      - ./db/migration:/flyway/sql
 
   backend:
     build: ./backend-node-api
+    restart: unless-stopped
     env_file:
       - .env
     ports:
-      - 3001:3001
+      - "${PORT}:${PORT}"
     volumes:
       - ./backend-node-api:/app
       - /app/node_modules
     depends_on:
-      - postgres
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-      start_period: 30s
+      postgres:
+        condition: service_healthy
 
   frontend:
     build: ./frontend
