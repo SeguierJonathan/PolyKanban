@@ -1,9 +1,25 @@
 <script lang="ts">
   import { kanbanData } from "./lib/data/kanban";
+  import { onMount } from "svelte";
+  import api, { HttpMethode } from "./lib/services/api";
+
+  type List = {
+    id: number;
+    position: number;
+    title: string;
+    created_at: string;
+    updated_at: string;
+  };
+
+  onMount(async () => {
+    const lists = await api<List[]>("/lists", HttpMethode.GET);
+
+    console.log(lists);
+  });
 </script>
 
 <header>
-  <h1>PolyKanban</h1>
+  <h1>PolyKanbans 1</h1>
 </header>
 <main>
   <ul class="kanban__board">
