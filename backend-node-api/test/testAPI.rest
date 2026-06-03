@@ -1,6 +1,9 @@
 @host = http://localhost:3001
 
 ###
+GET {{host}}/boards
+
+###
 GET {{host}}/lists
 
 ###
