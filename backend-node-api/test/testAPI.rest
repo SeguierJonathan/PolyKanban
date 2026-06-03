@@ -1,0 +1,11 @@
+@host = http://localhost:3001
+
+###
+GET {{host}}/lists
+
+###
+GET {{host}}/cards
+
+###
+GET {{host}}/tags
+

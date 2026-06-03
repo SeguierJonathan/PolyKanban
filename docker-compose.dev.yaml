@@ -20,6 +20,7 @@ services:
       FLYWAY_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB}
       FLYWAY_USER: ${POSTGRES_USER}
       FLYWAY_PASSWORD: ${POSTGRES_PASSWORD}
+      FLYWAY_LOCATIONS: filesystem:/flyway/migration
     command:
       - migrate
     depends_on:
@@ -27,7 +28,7 @@ services:
         condition: service_healthy
 
     volumes:
-      - ./db/migration:/flyway/sql
+      - ./db/migration:/flyway/migration
 
   backend:
     build: ./backend-node-api
