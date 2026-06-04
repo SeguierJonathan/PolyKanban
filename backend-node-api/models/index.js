@@ -15,8 +15,8 @@ List.hasMany(Card, {
     onDelete: "CASCADE"
 })
 
-Card.belongsToMany(Tag, { through: 'card_tag', onDelete: "CASCADE" });
-Tag.belongsToMany(Card, { through: 'card_tag', onDelete: "CASCADE" });
+Card.belongsToMany(Tag, { through: 'card_tag', as: "tags", onDelete: "CASCADE" });
+Tag.belongsToMany(Card, { through: 'card_tag', as: "tags", onDelete: "CASCADE" });
 
 
 

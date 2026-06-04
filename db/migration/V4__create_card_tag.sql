@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS card_tag (
+    card_id INTEGER REFERENCES card(id) ON DELETE CASCADE,
+    tag_id INTEGER REFERENCES tag(id) ON DELETE CASCADE,
+    created_at TIMESTAMPTZ,
+    updated_at TIMESTAMPTZ
+);
