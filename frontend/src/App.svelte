@@ -1,21 +1,32 @@
 <script lang="ts">
-  import { kanbanData } from "./lib/data/kanban";
+  import type { Board } from "./lib/data/kanban";
+  import { onMount } from "svelte";
+  import api, { HttpMethode } from "./lib/services/api";
+
+  let board: Board = { lists: [] };
+
+  onMount(async () => {
+    board.lists = await api<Board>("/boards", HttpMethode.GET);
+    console.log(board);
+  });
 </script>
 
 <header>
-  <h1>PolyKanban</h1>
+  <h1>PolyKanbans</h1>
 </header>
 <main>
   <ul class="kanban__board">
-    {#each kanbanData.lists as list, index (list.id)}
+    {#each board.lists as list (list.id)}
       <li class="kanban__list">
         <h2>{list.title}</h2>
-        {#each kanbanData.lists[index].cards as card, indexCard (card.id)}
+
+        {#each list.cards as card (card.id)}
           <article class="kanban__card">
             <h3>{card.title}</h3>
-            <p>{card.text}</p>
+            <p>{card.description}</p>
+
             <ul class="kanban__tags">
-              {#each kanbanData.lists[index].cards[indexCard].tags as tag}
+              {#each card.tags as tag (tag.id)}
                 <li class="kanban__tag" style="background-color: {tag.color};">
                   <span>{tag.text}</span>
                 </li>
