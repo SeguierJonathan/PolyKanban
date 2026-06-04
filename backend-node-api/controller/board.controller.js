@@ -11,10 +11,15 @@ export async function getAll(req, res) {
                 include: [
                     {
                         model: Tag,
+                        as: "tags"
                     }
-                ]
+                ],
             }
-
+        ],
+        order: [
+            ['position', 'ASC'],
+            [{ model: Card, as: 'cards' }, 'position', 'ASC'],
+            [{ model: Card, as: 'cards' }, { model: Tag, as: 'tags' }, 'id', 'ASC']
         ]
     });
 
