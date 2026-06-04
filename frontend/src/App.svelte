@@ -6,13 +6,13 @@
   let board: Board = { lists: [] };
 
   onMount(async () => {
-    board = await api<Board>("/boards", HttpMethode.GET);
+    board.lists = await api<Board>("/boards", HttpMethode.GET);
     console.log(board);
   });
 </script>
 
 <header>
-  <h1>PolyKanbans 1</h1>
+  <h1>PolyKanbans</h1>
 </header>
 <main>
   <ul class="kanban__board">
@@ -23,7 +23,7 @@
         {#each list.cards as card (card.id)}
           <article class="kanban__card">
             <h3>{card.title}</h3>
-            <p>{card.text}</p>
+            <p>{card.description}</p>
 
             <ul class="kanban__tags">
               {#each card.tags as tag (tag.id)}
