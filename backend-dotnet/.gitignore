@@ -1,0 +1,23 @@
+# Build output
+bin/
+obj/
+
+# User files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Logs
+*.log
+
+# Environment
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# NuGet
+*.nupkg
+.nuget/
