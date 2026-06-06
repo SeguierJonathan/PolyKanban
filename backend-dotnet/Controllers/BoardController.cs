@@ -12,7 +12,8 @@ public class BoardsController : ControllerBase
         return Ok(new[]
         {
             new { Id = 1, Title = "Board 1" },
-            new { Id = 2, Title = "Board 2" }
+            new { Id = 2, Title = "Board 2" },
+            new { Id = 3, Title = "Board 3" }
         });
     }
 }
