@@ -44,6 +44,21 @@ services:
       postgres:
         condition: service_healthy
 
+  backend-dotnet:
+    build: ./backend-dotnet
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "${PORTDOTNET}:${PORTDOTNET}"
+    volumes:
+      - ./backend-dotnet:/src
+      - /src/bin
+      - /src/obj
+    depends_on:
+      postgres:
+        condition: service_healthy
+
   frontend:
     build: ./frontend
     env_file:
