@@ -8,4 +8,4 @@ RUN dotnet restore
 
 EXPOSE 5000
 
-CMD ["dotnet", "watch", "run", "--urls", "http://0.0.0.0:5000"]
+CMD ["dotnet", "watch", "run", "--urls", "--non-interactive" , "http://0.0.0.0:5000"]

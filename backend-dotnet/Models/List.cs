@@ -1,11 +1,11 @@
 namespace Kanban.Models;
 
-public class List
+public class BoardList
 {
-    public int Id {get; set;}
-    public String Title {get; set;} = string.Empty;
+    public int Id { get; set; }
+    public String Title { get; set; } = string.Empty;
 
-    public int Position {get; set;}
-    
-        
+    public int Position { get; set; }
+
+
 }

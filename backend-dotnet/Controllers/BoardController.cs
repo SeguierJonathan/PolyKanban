@@ -1,4 +1,6 @@
+using Kanban.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace KanbanApi.Controllers;
 
@@ -6,14 +8,22 @@ namespace KanbanApi.Controllers;
 [Route("boards")]
 public class BoardsController : ControllerBase
 {
-    [HttpGet]
-    public IActionResult GetAll()
+
+    private readonly AppDbContext _db;
+
+    public BoardsController(AppDbContext db)
     {
-        return Ok(new[]
-        {
-            new { Id = 1, Title = "Board 1" },
-            new { Id = 2, Title = "Board 2" },
-            new { Id = 3, Title = "Board 3" }
-        });
+        _db = db;
+    }
+
+
+    [HttpGet]
+    public async Task<IActionResult> GetAll()
+    {
+
+        var boards = await _db.Lists.ToListAsync();
+
+        return Ok(boards);
+
     }
 }

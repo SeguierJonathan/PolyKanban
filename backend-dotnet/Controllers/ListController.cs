@@ -1,4 +1,6 @@
+using Kanban.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace KanbanApi.Controllers;
 
@@ -7,6 +9,14 @@ namespace KanbanApi.Controllers;
 
 public class ListController : ControllerBase
 {
+
+    private readonly AppDbContext _db;
+
+    public ListController(AppDbContext db)
+    {
+        _db = db;
+    }
+
     [HttpGet]
     public IActionResult GetAllList()
     {
