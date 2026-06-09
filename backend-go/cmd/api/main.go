@@ -30,7 +30,7 @@ func main() {
 
 	http.HandleFunc("/boards", getAll)
 
-	port := ":5005"
+	port := ":3005"
 
 	ln, err := net.Listen("tcp", port)
 	if err != nil {

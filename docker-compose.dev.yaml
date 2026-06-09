@@ -59,6 +59,19 @@ services:
       postgres:
         condition: service_healthy
 
+  backend-go:
+    build: ./backend-go
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "${PORTGO}:${PORTGO}"
+    volumes:
+      - ./backend-go:/app
+    depends_on:
+      postgres:
+        condition: service_healthy
+
   frontend:
     build: ./frontend
     env_file:
