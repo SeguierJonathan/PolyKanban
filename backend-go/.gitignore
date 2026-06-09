@@ -10,6 +10,7 @@ main
 app
 /bin/
 /dist/
+/tmp/
 
 # Go build cache
 *.test
