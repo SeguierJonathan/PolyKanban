@@ -1,0 +1,30 @@
+# Binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Output binary (souvent nommé main ou app)
+main
+app
+/bin/
+/dist/
+
+# Go build cache
+*.test
+*.out
+
+# Go modules cache (optionnel, généralement pas commit)
+vendor/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
