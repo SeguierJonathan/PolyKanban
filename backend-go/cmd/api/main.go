@@ -1,11 +1,18 @@
 package main
 
 import (
+	"backend-go/internal/routes/boards"
+	"backend-go/internal/routes/cards"
+	"backend-go/internal/routes/lists"
+	"backend-go/internal/routes/tags"
+
 	"encoding/json"
 	"fmt"
 	"log"
 	"net"
 	"net/http"
+
+	"github.com/go-chi/chi/v5"
 )
 
 type Board struct {
@@ -26,12 +33,16 @@ func getAll(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 
-	http.HandleFunc("/", hello)
+	r := chi.NewRouter()
 
-	http.HandleFunc("/boards", getAll)
+	boards.RegisterRoutes(r)
+	lists.RegisterRoutes(r)
+	cards.RegisterRoutes(r)
+	tags.RegisterRoutes(r)
 
 	port := ":3005"
 
+	//test port already use
 	ln, err := net.Listen("tcp", port)
 	if err != nil {
 		fmt.Println("Port already in use:", err)
@@ -41,6 +52,6 @@ func main() {
 
 	fmt.Println("Server start at: http://localhost" + port)
 
-	log.Fatal(http.ListenAndServe(port, nil))
+	log.Fatal(http.ListenAndServe(port, r))
 
 }
