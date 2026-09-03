@@ -1,12 +1,13 @@
 package main
 
 import (
-	"backend-go/internal/routes/boards"
-	"backend-go/internal/routes/cards"
-	"backend-go/internal/routes/lists"
-	"backend-go/internal/routes/tags"
+	"backend-go/internal/db"
+	"backend-go/internal/boards"
+	"backend-go/internal/cards"
+	"backend-go/internal/lists"
+	"backend-go/internal/tags"
+	"os"
 
-	"encoding/json"
 	"fmt"
 	"log"
 	"net"
@@ -15,23 +16,9 @@ import (
 	"github.com/go-chi/chi/v5"
 )
 
-type Board struct {
-	Id   int    `json:"id"`
-	Name string `json:"name"`
-}
-
-func hello(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "helloworld")
-}
-
-func getAll(w http.ResponseWriter, r *http.Request) {
-
-	board := Board{Id: 1, Name: "je suis name"}
-	w.Header().Set("content-type", "application/json")
-	json.NewEncoder(w).Encode(board)
-}
-
 func main() {
+
+	db.Init()
 
 	r := chi.NewRouter()
 
@@ -40,7 +27,7 @@ func main() {
 	cards.RegisterRoutes(r)
 	tags.RegisterRoutes(r)
 
-	port := ":3005"
+	port := fmt.Sprintf(":%s", os.Getenv("PORTGO"))
 
 	//test port already use
 	ln, err := net.Listen("tcp", port)
